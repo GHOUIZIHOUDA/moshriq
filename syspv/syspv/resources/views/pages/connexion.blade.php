@@ -12,15 +12,15 @@
             <div class="form-group">
                 <label for="inputEmail" style="font-family:roboto;">Email</label>
                 <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email">
-                @if ($errors->has('email'))
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                @endif
+                @error('email')
+                <span class="text-danger">{{ $errors->first('email') }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="inputPassword2" style="font-family:roboto;">Mot de passe</label>
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Mot de passe" name="passeword">
+                <input type="password" class="form-control" id="inputPassword2" placeholder="Mot de passe" name="password">
                 @if ($errors->has('passeword'))
-                    <span class="text-danger">{{ $errors->first('passeword') }}</span>
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
                 @endif
             </div>
             <div class="form-group mb-3">
