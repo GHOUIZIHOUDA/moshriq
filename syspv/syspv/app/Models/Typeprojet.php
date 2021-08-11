@@ -12,7 +12,7 @@ class Typeprojet extends Model
         'type',
     ];
     public function projets(){
-        return $this->hasMany(Projet::class, 'typeprojet_id');
+        return $this->hasMany(Projet::class);
     }
 
 }

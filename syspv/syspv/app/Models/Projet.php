@@ -12,16 +12,16 @@ class Projet extends Model
         'description', 'typeprojet_id', 'client_id', 'secteur_id',
     ];
     public function typeprojets(){
-        return $this->belongsTo(Typeprojet::class);
+        return $this->belongsTo(Typeprojet::class,'typeprojet_id');
     }
     public function status(){
         return $this->belongsTo(Status::class);
     }
     public function clients(){
-        return $this->belongsTo(Client::class, 'id');
+        return $this->belongsTo(Client::class, 'client_id');
     }
     public function secteurs(){
-        return $this->belongsTo(Secteur::class);
+        return $this->belongsTo(Secteur::class,'secteur_id');
     }
     public function departements(){
         return $this->belongsTo(Departement::class);
