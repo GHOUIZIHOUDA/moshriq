@@ -15,12 +15,11 @@ class Client extends Model
     protected $fillable = [
         'nom', 'prenom', 'email', 'passeword', 'telephone','adresse','descriptionprojet','ville_id'
     ];
- 
-
-    public function temoignages(){
-        return $this->hasMany(Temoignage::class);
-    }
+    
     public function villes(){
-        return $this->belongsTo(Ville::class);
+        return $this->belongsTo(Ville::class, 'ville_id');
+    }
+    public function projets(){
+        return $this->hasMany(Projet::class, 'client_id');
     }
 }

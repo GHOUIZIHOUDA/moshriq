@@ -15,20 +15,7 @@
 </div>
 <br><br><br><br><br>
             <h5>Bonjour, Mme GHOUIZI HOUDA</h5>
-            <div class="row ">
-                <br><br>
-                <b-col class="col-md-12">
-                    <b-card-group deck>
-                        <b-card class="bg-warning" title="Projets demandés" header-tag="header" footer-tag="footer">
-                            <b-card-text><h6>12 Projets demandés</h6></b-card-text>
-                        </b-card>
-                        <b-card class="tem" style="background-color: #202D65; color: white;" title="Clients" header-tag="header" footer-tag="footer">
-                            <b-card-text><h6>7 Clients</h6></b-card-text>
-                        </b-card>
-                    </b-card-group>
-                </b-col>
-            </div>
-        </div>
+
     </template><br><br>
 
 <div>
@@ -56,16 +43,16 @@
                         @foreach ($projet as $proj)
                         <tr>
                             <td name="id">{{$proj->id}}</td>
-                            <td name="nom">{{$proj->nom}}</td>
-                            <td name="prenom">{{$proj->prenom}}</td>
-                            <td name="email">{{$proj->email}}</td>
-                            <td name="telephone">{{$proj->telephone}}</td>
-                            <td name="adresse">{{$proj->adresse}}</td>
-                            <td name="ville">{{$proj->ville}}              
-                            <td name="secteur">{{$proj->secteur}}</td>
-                            <td name="typeprojet">{{$proj->typeprojet}}</td>
+                            <td name="nom">{{$proj->clients->nom}}</td>
+                            <td name="prenom">{{$proj->clients->prenom}}</td>
+                            <td name="email">{{$proj->clients->email}}</td>
+                            <td name="telephone">{{$proj->clients->telephone}}</td>
+                            <td name="adresse">{{$proj->clients->adresse}}</td>
+                            <td name="ville">{{$proj->clients->villes->ville}}</td>              
+                            <td name="secteur">{{$proj->secteurs->secteur}}</td>
+                            <td name="typeprojet">{{$proj->typeprojets->type}}</td>
                             <td name="descriptionprojet">{{$proj->description}}</td>
-                            <td><button class="btn btn-danger" ><a href = 'delete/{{ $proj->id }}' style="text-decoration:none; color:#ffffff;">Delete</a></button></td>                            
+                            <td><button class="btn btn-danger" ><a href = '/projet/delete/{{ $proj->id }}' style="text-decoration:none; color:#ffffff;">Delete</a></button></td>                            
                         </tr>
                         @endforeach
                     </tbody>

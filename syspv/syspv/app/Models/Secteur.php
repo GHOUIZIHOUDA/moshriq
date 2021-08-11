@@ -12,7 +12,7 @@ class Secteur extends Model
         'secteur',
     ];
     public function projets(){
-        return $this->hasMany(Projet::class);
+        return $this->hasMany(Projet::class, 'secteur_id');
     }
 
 }

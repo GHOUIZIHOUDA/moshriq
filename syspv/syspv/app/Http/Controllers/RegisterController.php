@@ -23,6 +23,20 @@ class RegisterController extends Controller
             'typeprojet'=>$typeprojets
         ]);
     }
+    public function getvilles(){
+        $villes = Ville::all();
+        return view('pages.dashville', [
+            'ville'=> $villes,
+        ]);
+    }
+    public function addville(Request $request){
+        $clients = Ville::create([
+        'ville'=>$request->ville,
+        'codepostal'=>$request->codepostal,
+        ]);
+        return redirect()->route('ville')
+                        ->with('success','Ville added successfully');
+    }
     public function save(Request $request){
         $clients = Client::create([
         'nom'=>$request->nom,
@@ -36,26 +50,28 @@ class RegisterController extends Controller
     ]);
         $projets = Projet::create([
         'description'=>$request->description,
-        'status_id'=>0,
         'typeprojet_id'=>$request->typeprojet,
         'secteur_id'=>$request->secteur,
         'client_id'=>$clients->id,
         ]);
-        return view('pages.connexion');
+        return view('pages.societe');
     }
 
     public function getprojets(){
-        $projets = Projet::all();
-        $villes = Ville::select('ville')->where('ville_id','id');
-        $clients = Client::all();
-        $secteurs = Secteur::all();
-        $typeprojets = Typeprojet::all();
+        $projets = Projet::with(['secteurs','typeprojets','clients.villes'])->get();
+
+        // $villes = Ville::select('ville')->where('ville_id','id');
+        // $clients = Client::all();
+        // $secteurs = Secteur::all();
+        // $typeprojets = Typeprojet::all();
+        // return $projets;
+        return $projets;
         return view('pages.dashproj', [
             'projet'=> $projets,
-            'client'=>$clients,
-            'ville'=>$villes,
-            'secteur'=>$secteurs,
-            'typeprojet'=>$typeprojets
+            // 'client'=>$clients,
+            // 'ville'=>$villes,
+            // 'secteur'=>$secteurs,
+            // 'typeprojet'=>$typeprojets
         ]);
     }
 
@@ -64,14 +80,23 @@ class RegisterController extends Controller
         Projet::find($id)->delete();
   
         return redirect()->route('projet')
-                        ->with('success','User deleted successfully');
+                        ->with('success','Projet deleted successfully');
+    }
+    public function deleteville($id)
+    {
+        Ville::find($id)->delete();
+  
+        return redirect()->route('ville')
+                        ->with('success','Ville deleted successfully');
     }
 
     public function login(){
         $admins = Admin::all();
-        return view('pages.connexion', [
-            'admin'=> $admins,
-        ]);
+        if('email'==$request->email && 'password'==$request->password){
+            return view('pages.dashproj', [
+                'admin'=> $admins,
+            ]);
+        }
     }
 
 }

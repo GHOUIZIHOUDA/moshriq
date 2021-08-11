@@ -9,7 +9,7 @@ class Projet extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'description', 'typeprojet_id', 'status_id', 'client_id', 'secteur_id',
+        'description', 'typeprojet_id', 'client_id', 'secteur_id',
     ];
     public function typeprojets(){
         return $this->belongsTo(Typeprojet::class);
@@ -18,16 +18,13 @@ class Projet extends Model
         return $this->belongsTo(Status::class);
     }
     public function clients(){
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class, 'id');
     }
     public function secteurs(){
         return $this->belongsTo(Secteur::class);
     }
     public function departements(){
         return $this->belongsTo(Departement::class);
-    }
-    public function composants(){
-        return $this->belongsToMany(Composant::class, 'Projet_has_composant');
     }
 
 }

@@ -19,7 +19,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('pages.societe');
 });
 
 
@@ -29,14 +29,20 @@ Route::view('/industrie', 'pages.industrie')->name('industrie');
 Route::view('/hotel', 'pages.hotel')->name('hotel');
 Route::view('/service', 'pages.service')->name('service');
 Route::view('/connexion', 'pages.connexion')->name('connexion');
-Route::view('/projet', 'pages.dashproj')->name('projet');
+Route::view('/agriculture', 'pages.agriculture')->name('agriculture');
+
+Route::view('/projet', [RegisterController::class, 'login'])->name('projet');
 
 Route::get('/dashproj', [RegisterController::class, 'getprojets']);
-Route::get('delete/{id}',[RegisterController::class, 'destroy']);
-
+Route::delete('/projet/delete/{id}',[RegisterController::class, 'destroy']);
+Route::delete('/ville/delete/{id}', [RegisterController::class, 'deleteville']);
+Route::redirect('/home','dashproj', 301);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register',[RegisterController::class, 'save'])->name('register');
-Route::view('/agriculture', 'pages.agriculture')->name('agriculture');
+Route::view('/societe', 'pages.societe')->name('societe');
+Route::get('/ville', [RegisterController::class, 'getvilles']);
+Route::post('/ville', [RegisterController::class, 'addville'])->name('ville');
+
 
 // Route::get('{any}', function () {
 //     return view('index');
